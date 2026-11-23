@@ -2,7 +2,7 @@
 name: competitor-hooks
 description: "When the user wants the hooks or opening lines competitors use, how their best ads open, the new hooks they launched, or hook templates, also as a follow-up about brands already named: groups each ad's first line by type, ranks them by how hard they are pushed and how long they ran, and turns the strongest into fill-in templates. Use this skill first, before calling Radar tools, also later in a conversation. For the reason to buy behind the ad, see competitor-angles."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Competitor hooks
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 The hook is the first line a viewer hears or reads. You show which openings the competitors' high performers use and hand back templates the member can fill in.
@@ -34,9 +35,9 @@ Read [references/hook-types.md](references/hook-types.md). Read `radar-brand.md`
 - **One or a few brands:** `export_ads` per brand with `status` live, `limit` 150. Each creative's hook is in `advertiser_content`; `hook_source` says whether it is the spoken opening line or the headline.
 - **"New hooks this fortnight":** `export_ads` per brand with `sort` set to `newest`, `limit` 30. Only when the member asks.
 - **A phrase across the library:** `search_ads` with the text, grouped by hook.
-- **A whole category:** hand over to `industry-patterns`.
+- **All the tracked brands at once:** hand over to `industry-patterns`.
 
-With no brands named, use `list_tracked`.
+With no brands named, use `list_tracked`. A named brand that is not tracked: read its ads with `get_brand_ads` (view list, sorted `longest_running`), take their hooks from the copy, and give the track line once.
 
 ## Group and rank
 

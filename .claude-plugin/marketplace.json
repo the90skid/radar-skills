@@ -1,9 +1,9 @@
 {
   "name": "radar-skills",
-  "owner": { "name": "DTC Daily", "url": "https://funnels.dtcdailynews.com/" },
+  "owner": { "name": "DTC Daily", "url": "https://radar.dtcdailynews.com/" },
   "metadata": {
     "description": "Radar skills for AI agents, running on the Funnel Library by DTC Daily",
-    "version": "1.4.1"
+    "version": "1.5.0"
   },
   "plugins": [
     {

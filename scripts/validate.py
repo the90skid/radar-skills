@@ -3,9 +3,9 @@
 import os, re, sys, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 S = os.path.join(ROOT, "skills"); bad = []; total = 0
-TOOLS = {"ad_movers","boards","category_trends","creative_tests","describe_data","fetch","folders","get_ad","get_brand","get_brand_ads","get_brand_pages",
+TOOLS = {"ad_movers","boards","creative_tests","describe_data","fetch","folders","get_ad","get_brand","get_brand_ads","get_brand_pages",
          "get_brief","get_page","get_usage","list_tracked","next_tests","save_to_board","search","search_ads","search_brands","search_pages","show_ad","show_page",
-         "suggest_competitors","top_ads","track_brand","export_ads","competitor_overview","killed_ads","weekly_changes","category_top_ads","brand_words"}
+         "suggest_competitors","top_ads","track_brand","export_ads","competitor_overview","killed_ads","weekly_changes","brand_words"}
 names = sorted(d for d in os.listdir(S) if os.path.isdir(os.path.join(S, d)))
 shared = hashlib.md5(open(os.path.join(ROOT, "shared/radar-data.md"), "rb").read()).hexdigest()
 # Markets (server markets.mjs COUNTRIES): the tools that take `market`, and the countries a member can track a brand in
@@ -24,6 +24,19 @@ for n0 in sorted(d for d in os.listdir(S) if os.path.isdir(os.path.join(S, d))):
     elif t0.index("<!-- rules -->") > t0.index("\n# ") + 200: bad.append(f"{n0}: rules block is not at the top of the body")
     for bare in re.findall(r"^\|.*\| Days \|", t0, re.M): bad.append(f"{n0}: a table column named only 'Days'")
     if re.search(r"still new|not spend or sales", t0): bad.append(f"{n0}: banned phrase")
+# Plans v2: the removed category tools are named nowhere, and the shared rules carry the tracked-brand fields
+REMOVED = ("category_top_ads", "category_trends")
+for root, _, files in os.walk(ROOT):
+    if ".git" in root: continue
+    for f in files:
+        if f.endswith((".md", ".json", ".sh")):
+            body = open(os.path.join(root, f)).read()
+            for r in REMOVED:
+                if r in body and f != "VERSIONS.md": bad.append(f"{os.path.relpath(os.path.join(root, f), ROOT)}: names the removed tool `{r}`")
+            if "lookup" in body.lower() and f != "VERSIONS.md": bad.append(f"{os.path.relpath(os.path.join(root, f), ROOT)}: mentions lookups (now requests)")
+            if "funnels.dtcdailynews.com" in body and f != "VERSIONS.md": bad.append(f"{os.path.relpath(os.path.join(root, f), ROOT)}: old address (use radar.dtcdailynews.com)")
+for field in ("track_line", "tracked", "requests_left_this_month", "swaps_left"):
+    if f"`{field}`" not in sh: bad.append(f"shared/radar-data.md: does not mention `{field}`")
 mk = re.search(r"^## Markets\n(.*?)(?=^## )", sh, re.S | re.M)
 if not mk: bad.append("shared/radar-data.md: no Markets section")
 else:
@@ -54,7 +67,7 @@ for n in names:
         if f"references/{f}" not in t: bad.append(f"{n}: references/{f} is not linked from SKILL.md")
         if f == "radar-data.md" and hashlib.md5(open(os.path.join(rd, f), "rb").read()).hexdigest() != shared: bad.append(f"{n}: radar-data.md out of sync (run scripts/sync-shared.sh)")
     for tool in set(re.findall(r"`([a-z]+(?:_[a-z]+)+)`", t)):
-        if tool not in TOOLS and tool not in ("since_days", "per_brand", "min_days_live", "next_offset", "run_by", "transcripts_missing", "history_nights", "watch_url_template", "library_url", "launched_after", "advertiser_content", "min_days_lived", "transcript_chars", "rank_now", "est_share_pct", "days_live", "live_copies", "end_check", "hook_source", "ad_id", "text", "size_note", "busiest_end_dates", "not_on_library_pages", "days_lived", "best_rank", "longest_days", "ad_ids", "brand_id", "also_tracked", "max_days_lived", "groups_rule", "page_url_template", "watch_url", "page_id", "also_tracked_markets", "my_brand_note", "list_rule", "reach_note", "creatives_counted", "only_this_brand", "ad_saying_it", "lived_7_days_or_less", "lived_30_days_or_more", "sections_total", "launched_after", "best_rank_now", "longest_creative_days_live", "creative_days_live", "creative_days_lived", "creative_started", "started", "lead_ad_id", "moved_ad_id"):
+        if tool not in TOOLS and tool not in ("since_days", "per_brand", "min_days_live", "next_offset", "run_by", "transcripts_missing", "longest_running", "track_line", "requests_left_this_month", "swaps_left", "history_nights", "watch_url_template", "library_url", "launched_after", "advertiser_content", "min_days_lived", "transcript_chars", "rank_now", "est_share_pct", "days_live", "live_copies", "end_check", "hook_source", "ad_id", "text", "size_note", "busiest_end_dates", "not_on_library_pages", "days_lived", "best_rank", "longest_days", "ad_ids", "brand_id", "also_tracked", "max_days_lived", "groups_rule", "page_url_template", "watch_url", "page_id", "also_tracked_markets", "my_brand_note", "list_rule", "reach_note", "creatives_counted", "only_this_brand", "ad_saying_it", "lived_7_days_or_less", "lived_30_days_or_more", "sections_total", "launched_after", "best_rank_now", "longest_creative_days_live", "creative_days_live", "creative_days_lived", "creative_started", "started", "lead_ad_id", "moved_ad_id"):
             bad.append(f"{n}: unknown tool or field `{tool}`")
     # a skill that names a brand to a market tool must point at the Markets rules (radar-brand.md's Market line)
     if n != "radar-setup" and MARKET_TOOLS & set(re.findall(r"`([a-z]+(?:_[a-z]+)+)`", t)) and "Market" not in t:

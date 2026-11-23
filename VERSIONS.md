@@ -1,5 +1,24 @@
 # Versions
 
+### 1.5.0 (unreleased)
+Plans v2 (23 Nov 2026). Every paid DTC Daily plan includes AI access: requests replace lookups, and deep answers (ranks, estimated share, top ads, movers, weekly changes, switched-off ads, tests, words, bulk export) cover the brands the member tracks. Any other brand answers at library depth with one `track_line`. The shared rules carry a "Tracked brands" section: give the library answer, then that one line, and track only when the member says yes (a swap is asked about first); when requests are used up, repeat the tool's line and stop. `category_top_ads` and `category_trends` are no longer in member plans: industry-patterns now reads the patterns across the brands the member tracks (`competitor_overview`, `export_ads`, `brand_words`), what-to-test-next uses `next_tests` over the tracked brands alone, and QUESTIONS reads "across my competitors". Skills that name a brand check `list_tracked` first. radar-setup uses the address `https://radar.dtcdailynews.com/mcp` and says how many brands the plan tracks, never a price; the old `funnels.dtcdailynews.com` address keeps working. landing-page-teardown: a stale second copy of the skill body is removed and its Rules section restored. `validate.py` fails on the removed tools, on "lookups" and on the old address.
+
+| Skill | Version |
+|---|---|
+| radar-setup | 1.5.0 |
+| my-brand | 1.5.0 |
+| competitor-overview | 1.5.0 |
+| brand-deep-dive | 1.5.0 |
+| competitor-angles | 1.5.0 |
+| competitor-hooks | 1.5.0 |
+| killed-ads | 1.5.0 |
+| weekly-watch | 1.5.0 |
+| industry-patterns | 1.5.0 |
+| landing-page-teardown | 1.5.0 |
+| script-teardown | 1.5.0 |
+| what-to-test-next | 1.5.0 |
+| ad-writer | 1.5.0 |
+
 ### 1.4.1 (unreleased)
 Fixes after the third retest. Rules block: final lines only (each figure checked against its row, never a correction or two versions of a figure); a slot the tool gives nothing for is left out with no words in its place; "only one brand" or "none of them" only after `brand_words` with `word` returns nothing for every other brand. The shared file adds the same three rules and searches for deferred Radar tools and tries one call before saying they are missing. competitor-angles: words answers give the top ad for each of the top 3 terms; the multi-brand "only one brand runs" line is replaced. landing-page-teardown: an Offer block always comes first, the second `show_page` call is aimed at the buy box, and the section table groups neighbouring sections. killed-ads: the 7-day and 30-day counts from the tool's summary in the lead line. competitor-overview: a Pages slot on each brand's last line. brand-deep-dive: a narrow question gets at most four bullets; headings carry no rule. script-teardown: "Your version" replaces the template. what-to-test-next: three lines per test. my-brand: a learning saved with no brand file creates the file.
 

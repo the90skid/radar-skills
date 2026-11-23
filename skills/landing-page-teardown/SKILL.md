@@ -2,7 +2,7 @@
 name: landing-page-teardown
 description: "When the user wants a competitor's landing page broken down, asks where a top ad sends people, how a page is built, its offer, what changed on it or whether it is A/B tested, also as a follow-up (\"break that page down section by section\", \"what changed on that page?\"): reads the page section by section, the ads that feed it, its versions and tests. Use this skill first, before calling Radar tools, also later in a conversation. For the ads themselves, see brand-deep-dive or script-teardown."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Landing page teardown
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You explain the page behind the ads: how it is built, what it offers, how it has changed, and how its first screen sits next to the ads that feed it.
@@ -33,7 +34,7 @@ Read `radar-brand.md` if it exists. If its Market line names a country other tha
 
 - The member gave a page or a link: use it.
 - They named an ad, or "that ad": `get_ad`, then take its landing page.
-- They named a brand: `top_ads`, and take the page of its best-placed ad.
+- They named a brand: check `list_tracked`. For a tracked brand, `top_ads`, and take the page of its best-placed ad. For a brand that is not tracked, `get_brand_pages` and take its page with the most live ads, then give the track line once.
 - When a page cannot be opened, take the brand's best-placed landing page that the tools do return and tear that one down. Name it in the lead line and say nothing about the other.
 
 ## Pull the data
@@ -70,59 +71,6 @@ Ask for the rest of the page, its other versions, or how the structure fits your
 ```
 
 Describe the page from the screens shown, with no remark about which sections were or were not seen.
-
-## Rules for every answer
-
-These rules apply to this answer and to every later answer in this conversation that uses Radar tools, whichever skill runs. Read [references/radar-data.md](references/radar-data.md) before the first tool call: it holds the full rules and what each field means.
-
-- **Ceiling, counted before sending.** A follow-up or direct question: 250 words, one lead line and at most five bullets. A report: the shape this skill gives below, then stop. Offer anything else in one closing line.
-- **Only what the ads show.** No first person about the work ("I read", "I covered", "I left out", "I can't"), no count of what was read, no notes on samples, limits, rounding or approximate figures, no corrections of earlier turns, no mention of files or tools, no sentence on what the data is not.
-- **No reasons.** Never "because", "so", "which suggests", "likely" or "probably" about a brand's choices.
-- **Quotes** exactly as returned, errors included.
-- **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
-- **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
-- **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
-<!-- /rules -->
-
-You explain the page behind the ads: how it is built, what it offers, how it has changed, and how its first screen sits next to the ads that feed it.
-
-Read `radar-brand.md` if it exists. If its Market line names a country other than the United States, follow "Markets" in the reference: pass `market` on every brand call and name the country once at the top.
-
-## Find the page
-
-- The member gave a page or a link: use it.
-- They named an ad, or "that ad": `get_ad`, then take its landing page.
-- They named a brand: `top_ads`, and take the page of its best-placed ad.
-- When a page cannot be opened, take the brand's best-placed landing page that the tools do return and tear that one down. Name it in the lead line and say nothing about the other.
-
-## Pull the data
-
-1. `get_page`: type, status, live ads, top ads, versions, A/B summary.
-2. `show_page`: at most two calls, the first screen and one set of sections, unless the member asks to see more.
-3. `get_ad` for the two best-placed ads feeding the page.
-
-## The answer
-
-A narrow question ("what changed on that page?") gets the lead line and at most five bullets, 250 words at most. The full teardown is at most 600 words, in this shape, then stop:
-
-```
-<Lead line: the page type, its link, how long it has taken traffic, how many live ads feed it.>
-
-| # | Section | Job | What it says |
-|---|---|---|---|
-(at most 8 rows, top to bottom; quote headlines and offer lines exactly; jobs: promise, make the problem felt, how the product works, proof, offer, answer doubts, call to action)
-
-Offer: <price, bundle, discount, gift, subscription, guarantee, urgency, the default choice; two lines at most>.
-
-Ad next to page
-- "<hook>" <link>: <the words of its hook that appear on the first screen, and the ones that do not>.
-(the two best-placed ads)
-
-Changes: <each version with its date and what moved; an A/B test with what the variants differ on and each one's share; three lines at most; leave out when there is one version>.
-
-Ask for the rest of the page, its other versions, or how the structure fits your brand.
-```
 
 ## Rules
 

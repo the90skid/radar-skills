@@ -2,7 +2,7 @@
 name: radar-setup
 description: "When the user wants to set up or connect Radar (the Funnel Library by DTC Daily), asks how to start, says the Radar tools are missing or not signed in, wants to pick or change the competitors they track or their country, or to track a brand in a country: connects the MCP, checks sign-in, sets the country, picks competitors and runs the first overview. Use this skill first, before calling Radar tools directly. For the member's own brand details, see my-brand."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Radar setup
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You get a member from nothing to their first competitor overview in one sitting. Keep every message short, about 120 words: one step, what to do, what to tell you when it is done. Say nothing about what you checked or which tool you called.
@@ -35,12 +36,12 @@ Look for the Radar tools (`get_brief`, `top_ads`, `competitor_overview`, `list_t
 
 **Tools absent:** first search for them by name (`top_ads`, `competitor_overview`, "DTC Funnels", "Funnel Library") and try `get_usage`. Only when the search finds nothing, or the call says the connection is not set up, give the steps for their client, then wait.
 
-- **Claude (web, desktop, mobile):** Settings, then Connectors, then Add custom connector. Name: Radar. Address: `https://funnels.dtcdailynews.com/mcp`. Press Connect and sign in with the DTC Daily account.
-- **Claude Code:** run `claude mcp add --transport http radar https://funnels.dtcdailynews.com/mcp`, then `/mcp`, choose radar, Authenticate.
-- **ChatGPT:** Settings, Apps, Advanced, turn on developer mode. Create an app named Radar with the same address, then sign in.
+- **Claude (web, desktop, mobile):** Settings, then Connectors, then Add custom connector. Name: Radar. Address: `https://radar.dtcdailynews.com/mcp`. Press Connect and sign in with the DTC Daily account.
+- **Claude Code:** run `claude mcp add --transport http radar https://radar.dtcdailynews.com/mcp`, then `/mcp`, choose radar, Authenticate.
+- **ChatGPT:** Settings, Apps, Advanced, turn on developer mode. Create an app named Radar with the address `https://radar.dtcdailynews.com/mcp`, then sign in.
 - **Other clients:** add a remote MCP server at the same address. Sign-in is OAuth in the browser.
 
-Never ask the member to paste a password or key into the chat. If they have no account, send them to `https://funnels.dtcdailynews.com/` to create one.
+Never ask the member to paste a password or key into the chat. If they have no account, send them to `https://radar.dtcdailynews.com/` to create one.
 
 ## Step 2: Which country?
 
@@ -57,9 +58,9 @@ Save the answer on the "Market" line of `radar-brand.md`, for example `Market: U
 ## Step 3: Who are the competitors?
 
 - **They already track brands in that country:** show the list and ask whether to keep it or change it.
-- **They track none there:** ask for their own website. Call `suggest_competitors` with it. Show up to eight suggestions, one line each with the reason the tool gives. Ask them to pick three to five, or to name others.
+- **They track none there:** ask for their own website. Call `suggest_competitors` with it. Show up to eight suggestions, one line each with the reason the tool gives. Call `get_usage` or `list_tracked` for the number of brands the plan tracks, and tell the member that number. Ask them to pick that many, or fewer, or to name others. Never state a price.
 
-Track the chosen brands with `track_brand`, one call each. For a country other than the United States, pass `market` with its code on each call. Tracking changes the member's account, so only track brands they named or picked.
+Track the chosen brands with `track_brand`, one call each, up to the number the plan tracks. When a tool says the slots are full or a swap is needed, repeat its line and ask before swapping. For a country other than the United States, pass `market` with its code on each call. Tracking changes the member's account, so only track brands they named or picked.
 
 If a brand is not in the library, `track_brand` with its website adds it. That uses one of the member's monthly adds and takes about an hour. Pass `market` here too, so it is tracked in their country once it is added. Ask before using an add.
 
@@ -83,5 +84,6 @@ End with three questions that fit what the overview showed, for example:
 
 ## If something fails
 
-- **Out of lookups:** say when the allowance resets (the tool says) and what can still be done free (brands already opened this month).
+- **Requests used up:** when a tool says requests are used up, repeat its line (it carries the reset date) and stop.
+- **A tool says AI access comes with a paid plan:** repeat its line and stop.
 - **A tool errors:** quote the error in one line, try once more, then stop and say what happened.

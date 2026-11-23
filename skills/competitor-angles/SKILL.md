@@ -2,7 +2,7 @@
 name: competitor-angles
 description: "When the user asks what angles competitors use, the main angles a brand is pushing, which words and phrases a brand uses most, which angles rose or were dropped, or an angle none of their competitors runs, also as a follow-up about brands already named: groups the ads' words, hooks and scripts into angles, ranked by how hard each is pushed. Use this skill first, before calling Radar tools, also later in a conversation. For opening lines only, see competitor-hooks."
 metadata:
-  version: 1.4.1
+  version: 1.5.0
 ---
 
 # Competitor angles
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 An angle is the reason to buy that an ad leads with: the problem it names, the person it speaks to, or the promise it makes. You group the ads by angle and show which angles each brand pushes hardest.
@@ -65,7 +66,7 @@ Ask for the same across their competitors.
 
 ## Several brands
 
-Use the brands the member named, or `list_tracked`. For each brand call `export_ads` with `status` live and `limit` 100 (compact rows, highest share first). Call again with `offset` only when the share you have is still small. Use `get_ad` for the full script of the ads an angle rests on. Group the ads with [references/angle-method.md](references/angle-method.md); never ask the member to label ads.
+Use the brands the member named, or `list_tracked`. A named brand that is not tracked: read its ads from `get_brand_ads` (view list, sorted `longest_running`) and give the track line once. For each brand call `export_ads` with `status` live and `limit` 100 (compact rows, highest share first). Call again with `offset` only when the share you have is still small. Use `get_ad` for the full script of the ads an angle rests on. Group the ads with [references/angle-method.md](references/angle-method.md); never ask the member to label ads.
 
 At most 500 words:
 

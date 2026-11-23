@@ -2,7 +2,7 @@
 name: killed-ads
 description: "When the user asks what a competitor tried and switched off, what they killed this month, how long their ads last, which long-running ad they just ended or what replaced it, also as a follow-up after a brand was named (\"what did they kill?\"): a brand's switched-off ads with days lived, its shortest-lived ads and longest runs that ended, and what it launched next. Use this skill first, before calling Radar tools, also later in a conversation. For what still runs, see brand-deep-dive."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Killed ads
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You show what a competitor switched off, how long each lasted, and what it launched to the same pages next.
@@ -35,7 +36,7 @@ Read `radar-brand.md` if it exists. If its Market line names a country other tha
 2. `killed_ads` again with `sort` set to `shortest` and `max_days_lived` 7: the shortest-lived ads.
 3. For "what replaced it", use `launched_after` on the rows you have.
 
-One brand per run unless the member names more. List only rows whose `end_check` is `verified`; say nothing about the others.
+One brand per run unless the member names more. Check `list_tracked` first. For a brand that is not tracked, give the track line in one sentence and offer to track it (see the shared rules). List only rows whose `end_check` is `verified`; say nothing about the others.
 
 ## The answer
 

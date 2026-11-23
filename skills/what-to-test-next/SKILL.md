@@ -2,7 +2,7 @@
 name: what-to-test-next
 description: "When the user wants to know what ads, angles, hooks, formats or landing pages to test next, asks for test ideas, a testing plan, a creative roadmap, five tests for next week, or what to make with the videos and statics they can produce: returns a ranked list of tests, each backed by competitor ads the brands keep running. Use this skill first, before calling Radar tools, also later in a conversation. Needs the member's brand details; see my-brand."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # What to test next
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You turn competitor evidence into a short, ranked list of tests the member can brief this week. Every test is backed by ads that competitors keep running.
@@ -41,8 +42,7 @@ Read `radar-brand.md`. If it does not exist and the member has not described the
 
 1. `competitor_overview` for the tracked brands.
 2. For the two or three competitors closest to the member, `export_ads` (`status` live, `limit` 40). One call a brand.
-3. `next_tests`. Drop anything generic or that the member already does.
-4. With few direct competitors, `category_top_ads` for their category.
+3. `next_tests`, which reads the brands the member tracks. Drop anything generic or that the member already does.
 
 Use results already in this conversation and skip the matching pull.
 

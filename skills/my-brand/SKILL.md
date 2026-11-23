@@ -2,7 +2,7 @@
 name: my-brand
 description: "When the user wants to tell Radar about their own brand, product, customer, offer or country, or update it, or reports a test result or a learning to keep (\"we tested the GLP-1 angle and it beat our control, save that\"): creates or updates radar-brand.md, the brand file every other Radar skill reads first, and its Learnings. Use this skill first, also later in a conversation. Run it once before what-to-test-next or ad-writer."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # My brand
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You create and keep one short file, `radar-brand.md`, in the working folder. Every other Radar skill reads it so the member never repeats themselves. In a client with no files, keep the same content in the conversation and tell the member to paste it at the start of a new chat.

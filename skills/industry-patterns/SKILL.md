@@ -1,8 +1,8 @@
 ---
 name: industry-patterns
-description: "When the user asks what is working across a whole category (supplements, skincare, pet, apparel and so on), what the best ads in a market share, which formats or page types are rising, or what page type the best ads in a category send to: answers from Radar data by reading the high performers of every brand in the category. Use this skill first, before calling Radar tools, also later in a conversation. For named competitors only, see competitor-angles and competitor-overview."
+description: "When the user asks what is working across the competitors they track, what their best ads share, which hooks, formats or page types show up across brands, or what the best ads of all their competitors send people to: answers from Radar data by reading the tracked brands side by side. Use this skill first, before calling Radar tools, also later in a conversation. For one named brand, see brand-deep-dive."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Industry patterns
@@ -22,49 +22,47 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
-You look past the member's own competitors to the whole category and report what its high performers share.
+You look across the brands the member tracks and report what their high performers share.
 
-Read `radar-brand.md` if it exists. Category reads cover the United States library. When its Market line names another country, say "in the United States" once at the top.
+Read `radar-brand.md` if it exists. If its Market line names a country other than the United States, follow "Markets" in the reference: pass `market` on every brand call and name the country once at the top.
 
-## Which category
+## Which brands
 
-Use the category the member names. If they name none, take it from `radar-brand.md`, or call `describe_data` to list the categories and ask them to pick. Never guess between two that could fit.
+The brands the member tracks (`list_tracked`). If the member names a group ("my skincare competitors"), use the tracked brands that fit it. Never read a brand the member does not track. When they name one, give the track line once and read the others.
 
 ## Pull the data
 
-1. `category_top_ads` with the category, `per_brand` 3, `limit` 100, `min_days_live` 14, `transcripts` false.
-2. `category_top_ads` again with `per_brand` 1 and `transcripts` true: each brand's top creative with its script.
-3. `category_trends` for the same category.
-
-Do not open individual brands in this skill.
+1. `competitor_overview` for the tracked brands.
+2. `export_ads` (compact rows, `status` live, `limit` 40) for each tracked brand. One call a brand, or two for a brand with a long list.
+3. `brand_words` for each tracked brand, to confirm what the brands say in common.
 
 ## Find the patterns
 
-Count. A pattern is something at least a quarter of the brands share: angle, hook type, format, video structure, page type, offer, proof or length of run.
+Count brands, not ads. A pattern is something at least a quarter of the tracked brands share (two, when three are tracked): angle, hook type, format, video structure, page type, offer, proof or length of run. Read each brand's high performers: the rows with the highest `est_share_pct` and the longest `creative_days_live`.
 
 ## The answer
 
 At most 450 words. This shape, then stop:
 
 ```
-<Lead line: the category, the date of the ranks, and the pattern the most brands share with its count.>
+<Lead line: the date of the ranks and the pattern the most tracked brands share, with its count.>
 
-1. <Pattern>: <n> of <N> brands.
+1. <Pattern>: <n> of <N> tracked brands.
    - <Brand>: "<hook>", creative live <d> days. <link>
    - <Brand>: "<hook>", creative live <d> days. <link>
    - <Brand>: "<hook>", creative live <d> days. <link>
-(exactly 4 patterns, three ads each, from three different brands)
+(exactly 4 patterns, three ads each, from three different brands; with fewer brands, one ad per brand)
 
-Rising: <one or two lines from category_trends, with the weeks compared>.
-
-Ask for more patterns, what only a few brands do, or how this fits your brand.
+Ask for more patterns, what only one brand does, or how this fits your brand.
 ```
 
 ## Rules
 
 - Rank and share are within each brand. Never rank one brand's ad above another's. Count how many brands do something.
 - Give counts, never percentages of a small number.
-- Every pattern cites three ads, each with its own link. Never cite only a brand or a page.
+- Every pattern cites its ads, each with its own link. Never cite only a brand or a page.
+- A line saying only one brand does something, or none does, comes after `brand_words` with `word` for every other brand.

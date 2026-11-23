@@ -2,7 +2,7 @@
 name: weekly-watch
 description: "When the user wants to know what changed with their competitors this week or since they last looked, asks for a weekly report, an update or what is new, or a Monday brief: launches, climbers, switch-offs and landing-page changes for every tracked competitor over the last 7 days, most important first. Use this skill first, before calling Radar tools, also later in a conversation. For the standing picture, see competitor-overview. For one ad they just ended, see killed-ads."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Weekly watch
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You tell the member what moved since last week, in the order they should care about it.

@@ -2,7 +2,9 @@
 
 Skills that let your own AI work out what your competitors' ads are doing: their angles, hooks, scripts, landing pages, what they killed and what to test next.
 
-The skills run on Radar, part of the [Funnel Library by DTC Daily](https://funnels.dtcdailynews.com/). Radar reads your competitors' Meta ads every night and joins each ad to the landing page it sends people to. The skills tell your AI how to read that record. Your AI does the thinking; Radar supplies the data.
+The skills run on Radar, part of the [Funnel Library by DTC Daily](https://radar.dtcdailynews.com/). Radar reads your competitors' Meta ads every night and joins each ad to the landing page it sends people to. The skills tell your AI how to read that record. Your AI does the thinking; Radar supplies the data.
+
+Every paid DTC Daily plan includes Radar in your AI.
 
 Works with Claude Code, Claude (web and desktop), Codex, Cursor and any agent that supports the [Agent Skills format](https://agentskills.io).
 
@@ -18,7 +20,7 @@ Works with Claude Code, Claude (web and desktop), Codex, Cursor and any agent th
 | "What hooks open their best ads?" | `competitor-hooks` |
 | "What did they try and kill?" | `killed-ads` |
 | "What changed this week?" | `weekly-watch` |
-| "What is working in my category?" | `industry-patterns` |
+| "What is working across my competitors?" | `industry-patterns` |
 | "Break down the page behind their top ad" | `landing-page-teardown` |
 | "Turn this ad into a script template" | `script-teardown` |
 | "What should I test next?" | `what-to-test-next` |
@@ -45,11 +47,11 @@ Then run `/mcp`, choose **radar**, and sign in with your DTC Daily account.
 npx skills add the90skid/radar-skills
 ```
 
-Then connect Radar as a remote MCP server at `https://funnels.dtcdailynews.com/mcp` and sign in.
+Then connect Radar as a remote MCP server at `https://radar.dtcdailynews.com/mcp` and sign in.
 
 ### Claude on the web or desktop
 
-1. Settings → Connectors → Add custom connector. Name it Radar, paste `https://funnels.dtcdailynews.com/mcp`, press Connect and sign in.
+1. Settings → Connectors → Add custom connector. Name it Radar, paste `https://radar.dtcdailynews.com/mcp`, press Connect and sign in.
 2. Download the skill ZIPs from the latest release and add each under Customize → Skills → Upload a skill.
 
 ### ChatGPT
@@ -76,7 +78,7 @@ Radar reads the ads Meta shows in the United States. You can also track a compet
 
 ## Privacy
 
-The skills are text files that run inside your AI. Radar receives only the tool calls your AI makes (which brand, which page). It never sees your conversation. [Privacy policy](https://funnels.dtcdailynews.com/privacy/).
+The skills are text files that run inside your AI. Radar receives only the tool calls your AI makes (which brand, which page). It never sees your conversation. [Privacy policy](https://radar.dtcdailynews.com/privacy/).
 
 ## Licence
 

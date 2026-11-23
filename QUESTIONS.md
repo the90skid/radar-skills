@@ -30,9 +30,9 @@ Radar gives your AI the nightly record of what your competitors run, what they p
 
 16. "What hooks open my competitors' best ads?"
 17. "Give me fill-in hook templates from the hooks they have kept running longest."
-18. "Which hook types appear in my category but not in their ads?"
+18. "Which hook types appear in my competitors' ads but not in mine?"
 19. "What new hooks did they launch in the last two weeks?"
-20. "Find ads in my category that open with a warning."
+20. "Find ads from my competitors that open with a warning."
 
 ## What they killed
 
@@ -56,12 +56,12 @@ Radar gives your AI the nightly record of what your competitors run, what they p
 32. "Turn that template into a script for my product."
 33. "Write a creator brief from that ad that my UGC creator can shoot tomorrow."
 
-## Your whole category
+## Across your competitors
 
-34. "What is working across supplements right now?"
-35. "Which hooks and page types do most high performers in my category share?"
-36. "Which formats are rising in skincare this month?"
-37. "What page type do the best pet ads send to?"
+34. "What is working across my competitors right now?"
+35. "Which hooks and page types do most high performers across my competitors share?"
+36. "Which formats do most of my competitors run?"
+37. "What page type do my competitors' best ads send to?"
 
 ## Decide and make
 

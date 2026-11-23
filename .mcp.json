@@ -2,7 +2,7 @@
   "mcpServers": {
     "radar": {
       "type": "http",
-      "url": "https://funnels.dtcdailynews.com/mcp"
+      "url": "https://radar.dtcdailynews.com/mcp"
     }
   }
 }

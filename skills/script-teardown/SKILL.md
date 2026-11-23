@@ -2,7 +2,7 @@
 name: script-teardown
 description: "When the user wants a competitor's video ad broken down beat by beat or turned into a script template, asks how an ad is built, wants a beat sheet their creator can shoot from, or the structure their best videos share, also as a follow-up (\"break down that ad\", \"their three best videos\"): splits the script into beats and returns a fill-in template. Use this skill first, before calling Radar tools, also later in a conversation. For new ads for their own product, see ad-writer."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Script teardown
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You take a video ad apart beat by beat and hand back a template that keeps its structure and none of its claims.
@@ -32,7 +33,7 @@ Read [references/beat-sheet.md](references/beat-sheet.md). Read `radar-brand.md`
 ## Which ad
 
 - The member gave an ad id, a link or "that ad": `get_ad`.
-- They named a brand: `top_ads`, and take the best-placed proven video that has a transcript.
+- They named a brand: check `list_tracked`. For a tracked brand, `top_ads`, and take the best-placed proven video that has a transcript. For a brand that is not tracked, `get_brand_ads` (view list, sorted `longest_running`), take its longest-running video that has a transcript, and give the track line once.
 - "The top three": one beat table each with at most 6 rows, then one template for the structure they share.
 
 Choose only from ads with a transcript, and say nothing about the others. When the member gave one specific ad and its script is not there yet, say in one line that the script for that ad is being prepared and will be ready shortly, and offer the next best ad with a script now.

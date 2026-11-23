@@ -2,7 +2,7 @@
 name: brand-deep-dive
 description: "When the user wants one competitor broken down, asks what a brand's ad strategy is, its highest performers and what they share, which of its ads ran longest, what it is testing, or how its ads and pages fit together, also as a follow-up about a brand already named: high performers, tests, kills, long-runners and pages for one brand. Use this skill first, before calling Radar tools, also later in a conversation. For several brands at once, see competitor-overview."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Brand deep dive
@@ -22,12 +22,15 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You brief the member on one brand's ad account: what it runs, what it pushes hardest, what it tried and dropped, and where the traffic goes.
 
 Read `radar-brand.md` if it exists. If its Market line names a country other than the United States, follow "Markets" in the reference: pass `market` on every brand call and name the country once at the top.
+
+Check `list_tracked` first. When the brand named is not tracked, answer with what library depth supports: `get_brand_ads` (view list, sorted `longest_running`), `get_brand_pages` and the ads' own copy, and give the track line once at the end. Leave out the parts that need ranks, shares, tests or switched-off ads.
 
 ## Pull the data
 

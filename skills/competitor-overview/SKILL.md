@@ -2,7 +2,7 @@
 name: competitor-overview
 description: "When the user wants to know what their competitors are doing in ads, asks for an overview or a competitor report, who is pushing what, to compare several brands side by side, or to run the overview again after adding a brand: top ads, formats, hooks and landing pages for every tracked competitor in one read. Use this skill first, before calling Radar tools, also later in a conversation. For one brand in depth, see brand-deep-dive. For what changed this week, see weekly-watch."
 metadata:
-  version: 1.3.1
+  version: 1.5.0
 ---
 
 # Competitor overview
@@ -22,7 +22,8 @@ These rules apply to this answer and to every later answer in this conversation 
 - **Never about any ads, the member's included:** budget, spend, cost, sales, performance, ROAS, win, winner.
 - **Links.** Every ad named carries its own link from the tool, or the tool's template filled with its id; otherwise no link. Never compose a URL.
 - **Days** always carry a label: "creative live", "this copy live", "lived".
-- Every tracked brand is a competitor. Folder names mean nothing. Never state lookup costs.
+- **Tracked brands.** Deep answers cover tracked brands. When a tool answers `tracked` false or carries `track_line`, give the library answer you have, then that one line, and offer to track the brand. Track only when the member says yes; if a swap is needed, repeat the tool's line and ask first. When requests are used up, repeat the tool's line and stop.
+- Every tracked brand is a competitor. Folder names mean nothing. Never state what a call costs.
 <!-- /rules -->
 
 You give the member the state of their competitors in one read: what each is pushing, in what format, to which kind of page, and what stands out across them.
@@ -55,7 +56,7 @@ Across them
 Ask "What angles are they using?", "Break down <brand>." or "What should I test next?"
 ```
 
-Leave out any line the answer has no figure for. If a brand the member named is not in the library, give it one line offering to add it with `track_brand` and its website. A brand that answers with one line (first read, or no live ads that night): repeat that line as its block.
+Leave out any line the answer has no figure for. If a brand the member named is not in the library, give it one line offering to add it with `track_brand` and its website. A brand in the library that is not tracked gets its library-depth line and the track line once. A brand that answers with one line (first read, or no live ads that night): repeat that line as its block.
 
 ## Rules
 
