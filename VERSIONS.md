@@ -1,6 +1,6 @@
 # Versions
 
-### 1.5.0 (unreleased)
+### 1.5.0
 Plans v2 (23 Nov 2026). Every paid DTC Daily plan includes AI access: requests replace lookups, and deep answers (ranks, estimated share, top ads, movers, weekly changes, switched-off ads, tests, words, bulk export) cover the brands the member tracks. Any other brand answers at library depth with one `track_line`. The shared rules carry a "Tracked brands" section: give the library answer, then that one line, and track only when the member says yes (a swap is asked about first); when requests are used up, repeat the tool's line and stop. `category_top_ads` and `category_trends` are no longer in member plans: industry-patterns now reads the patterns across the brands the member tracks (`competitor_overview`, `export_ads`, `brand_words`), what-to-test-next uses `next_tests` over the tracked brands alone, and QUESTIONS reads "across my competitors". Skills that name a brand check `list_tracked` first. radar-setup uses the address `https://radar.dtcdailynews.com/mcp` and says how many brands the plan tracks, never a price; the old `funnels.dtcdailynews.com` address keeps working. landing-page-teardown: a stale second copy of the skill body is removed and its Rules section restored. `validate.py` fails on the removed tools, on "lookups" and on the old address.
 
 | Skill | Version |
