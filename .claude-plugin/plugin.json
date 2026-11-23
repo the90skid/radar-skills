@@ -1,0 +1,11 @@
+{
+  "name": "radar-skills",
+  "description": "Radar skills for AI agents: competitor overview, angles, hooks, killed ads, weekly watch, industry patterns, script and landing page teardowns, what to test next and an ad writer, running on the Funnel Library by DTC Daily",
+  "version": "1.4.1",
+  "author": {
+    "name": "DTC Daily"
+  },
+  "homepage": "https://funnels.dtcdailynews.com/",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://funnels.dtcdailynews.com/privacy/"
+}

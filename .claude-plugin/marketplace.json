@@ -1,0 +1,15 @@
+{
+  "name": "radar-skills",
+  "owner": { "name": "DTC Daily", "url": "https://funnels.dtcdailynews.com/" },
+  "metadata": {
+    "description": "Radar skills for AI agents, running on the Funnel Library by DTC Daily",
+    "version": "1.4.1"
+  },
+  "plugins": [
+    {
+      "name": "radar-skills",
+      "description": "13 skills that turn nightly competitor ad and landing page data into angles, hooks, teardowns, test plans and new ads. Connects the Radar MCP on install.",
+      "source": "./"
+    }
+  ]
+}
